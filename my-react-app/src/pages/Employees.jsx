@@ -1,14 +1,16 @@
 import EmployeeList from "../components/EmployeeList";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { deleteEmployee, getEmployees } from "../services/employeeService"
 import SearchEmployee from "../components/SearchBar";
 import EmployeeListLoading from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import EmployeeContext from "../context/EmployeeContext";
+
 function Employees() {
-      const [employees, setEmployees] = useState([]);
-        const [search, setSearch] = useState("");
-          const [loading, setLoading] = useState(false);
-          const navigate = useNavigate()
+      const { employees, setEmployees } = useContext(EmployeeContext);
+      const [search, setSearch] = useState("");
+      const [loading, setLoading] = useState(false);
+      const navigate = useNavigate()
           async function handleDelete(id) {
         
         
@@ -33,8 +35,8 @@ function Employees() {
         navigate("/employees/new")
     }
 
-    const filteredEmployees = employees.filter((employee) => {
-    const keyword = search.trim().toLowerCase();
+    const filteredEmployees = (employees || []).filter((employee) => {
+      const keyword = search.trim().toLowerCase();
 
         return (
         employee.name.toLowerCase().includes(keyword) ||

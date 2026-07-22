@@ -9,14 +9,17 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar.jsx"
 import EmployeesLayout from "./pages/EmployeesLayout.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import { useLocation } from "react-router-dom";
 
  function App() {
+    const location = useLocation();
+    const hideNavbar = location.pathname === '/';
     return (
         <div style={{ display: "flex", height: "100vh" }}>
-            <div style={{ width: "25%", overflowY: "auto" }}>
+            {!hideNavbar && (<div style={{ width: "25%", overflowY: "auto" }}>
                 <Navbar />
-            </div>
-            <div style={{ width: "75%", overflowY: "auto" }}>
+            </div>)}
+            <div style={{ width: !hideNavbar ? "75%" : "100%", overflowY: "auto" }}>
                 <Routes>
                    <Route path="/employees" element={<EmployeesLayout />}>
                         <Route index element={<Employees />} />
