@@ -8,7 +8,7 @@ function Dashboard() {
         return <Navigate to="/" replace />;
     }
 
-    return <h1>Dashboard</h1>;
+    return <h1>Dashboard - Dashboard</h1>;
 }
 
 export default Dashboard;
